@@ -1,0 +1,55 @@
+﻿<Window x:Class="Safi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SAFI - Simple Auto-Focus Interface" Left="100" Top="100" ResizeMode="NoResize" Topmost="True" Closing="Window_Closing" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="568" Width="351" Icon="/Safi;component/SafiIcons.ico" UseLayoutRounding="True">
+    <Grid Width="326" Height="529">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="164*" />
+            <ColumnDefinition Width="162*" />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Focuser Selection" Height="61" HorizontalAlignment="Left" Margin="8,5,0,0" Name="groupBox1" VerticalAlignment="Top" Width="306" Grid.ColumnSpan="2">
+            <Grid Width="292">
+                <TextBox Text="{Binding Path=FocuserName}" Height="23" HorizontalAlignment="Left" Margin="6,10,0,0" Name="textBoxFocuser" VerticalAlignment="Top" Width="136" IsReadOnly="True" />
+                <CheckBox IsChecked="{Binding Path=FocuserConnected}" Content="Connect" Height="16" HorizontalAlignment="Left" Margin="149,13,0,0" Name="checkBoxFocuserConnected" VerticalAlignment="Top" Checked="checkBoxFocuserConnected_Checked" Unchecked="checkBoxFocuserConnected_Unchecked" />
+                <Button IsEnabled="{Binding Path=FocuserNotConnected, Mode=OneTime}" Content="Select" Height="23" HorizontalAlignment="Left" Margin="221,9,0,0" Name="buttonFocuserSelect" VerticalAlignment="Top" Width="65" Click="buttonFocuserSelect_Click" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Connections" Height="73" HorizontalAlignment="Left" Margin="9,72,0,0" Name="groupBox3" VerticalAlignment="Top" Width="148">
+            <Grid>
+                <CheckBox IsChecked="{Binding Path=MaximConnected}" Content="MaxIm DL" Height="16" HorizontalAlignment="Left" Margin="11,7,0,0" Name="checkBoxMaximRunning" VerticalAlignment="Top" Width="117" Checked="checkBoxMaximRunning_Checked" Unchecked="checkBoxMaximRunning_Unchecked" />
+                <CheckBox IsChecked="{Binding Path=CameraConnected}" Content="CCD Camera" Height="16" HorizontalAlignment="Left" Margin="11,29,0,0" Name="checkBoxCamera" VerticalAlignment="Top" Checked="checkBoxCamera_Checked" Unchecked="checkBoxCamera_Unchecked" />
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Header="Options" Height="73" HorizontalAlignment="Left" Margin="0,72,0,0" Name="groupBox4" VerticalAlignment="Top" Width="150" Grid.Column="1">
+            <Grid>
+                <CheckBox IsChecked="{Binding Path=Ontop}" Content="Window On Top" Height="15" HorizontalAlignment="Left" Margin="11,7,0,0" Name="checkBoxOnTop" VerticalAlignment="Top" Width="120" Checked="checkBoxOnTop_Checked" Unchecked="checkBoxOnTop_Unchecked" />
+                <CheckBox IsChecked="{Binding Path=Simulator}" Content="Data Simulator" Height="15" HorizontalAlignment="Left" Margin="11,29,0,0" Name="checkBoxSimulator" VerticalAlignment="Top" Width="111" />
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Header="Auto-Focus" Height="209" HorizontalAlignment="Left" Margin="8,148,0,0" Name="groupBoxAutoFocus" VerticalAlignment="Top" Width="306" IsEnabled="True" Grid.ColumnSpan="2">
+            <Grid Height="182">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="167*" />
+                    <ColumnDefinition Width="154*" />
+                </Grid.ColumnDefinitions>
+                
+                <Button Content="{Binding Path=AutoFocusButtonText, Mode=OneWay, FallbackValue=Start}" IsEnabled="{Binding Path=AutoFocusButtonEnabled}" Height="38" HorizontalAlignment="Right" Margin="0,6,7,0" Name="buttonFocus" VerticalAlignment="Top" Width="281" Click="buttonFocus_Click" Grid.ColumnSpan="2" FontSize="18" />
+                <TextBox Text="{Binding Path=HFD, Mode=OneWay, FallbackValue=-}" Height="38" HorizontalAlignment="Left" Margin="6,50,0,0" Name="textBoxHFD" VerticalAlignment="Top" Width="137" IsReadOnly="True" TextAlignment="Center" FontFamily="Courier New" FontWeight="Bold" FontSize="26" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Half Flux Diameter (HFD)" />
+                <TextBox Text="{Binding Path=FWHM, Mode=OneWay, FallbackValue=-}" Height="38" HorizontalAlignment="Right" Margin="0,50,7,0" Name="textBoxFWHM" VerticalAlignment="Top" Width="137" IsReadOnly="True" TextAlignment="Center" FontFamily="Courier New" FontWeight="Bold" FontSize="26" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="FWHM" Grid.ColumnSpan="2" />
+                <TextBox Text="{Binding Path=Position, Mode=OneWay, FallbackValue=-}" Height="38" HorizontalAlignment="Left" Margin="6,94,0,0" Name="textBoxPosition" VerticalAlignment="Top" Width="282" IsReadOnly="True" TextAlignment="Center" FontFamily="Courier New" FontWeight="Bold" FontSize="26" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Focuser position (relative to the zero start-point)" Grid.ColumnSpan="2" />
+                <TextBox Text="{Binding Path=CurrentSystemStatus, Mode=OneWay, FallbackValue=-}"  Height="38" HorizontalAlignment="Left" Margin="6,138,0,0" Name="textBoxStatus" VerticalAlignment="Top" Width="282" IsReadOnly="True" TextAlignment="Center" Foreground="Green" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Camera/Focuser Status" FontFamily="Courier New" FontSize="22" Grid.ColumnSpan="2" FontWeight="Bold" />
+            </Grid>
+        </GroupBox>
+        
+        <ListBox Height="127" HorizontalAlignment="Left" Margin="8,399,0,0" Name="listBoxFocusMonitorLog" VerticalAlignment="Top" Width="306" Grid.ColumnSpan="2" />
+        <StackPanel Grid.ColumnSpan="2" Height="30" HorizontalAlignment="Left" Margin="59,363,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="210" Orientation="Horizontal">
+            <Button Content="Nudge" Height="23" Name="buttonNudge" Width="70" Click="buttonNudge_Click" SnapsToDevicePixels="True" />
+            <Button Content="Plot" Height="23" Name="buttonGraph" Width="70" Click="buttonGraph_Click" SnapsToDevicePixels="True" />
+            <Button Content="Options" Height="23" Name="buttonMoreOptions" FontWeight="Normal" Click="buttonMoreOptions_Click" Width="70" SnapsToDevicePixels="True" />
+        </StackPanel>
+    </Grid>
+</Window>

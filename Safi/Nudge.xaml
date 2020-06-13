@@ -1,0 +1,18 @@
+﻿<Window x:Class="Safi.Nudge"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nudge Focuser" Height="133" Width="166" WindowStyle="ToolWindow" ShowInTaskbar="False" ResizeMode="NoResize" Icon="/Safi;component/MiscIcons.ico" Closing="Window_Closing" UseLayoutRounding="True">
+    <Grid Width="146">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="232*" />
+            <ColumnDefinition Width="15*" />
+        </Grid.ColumnDefinitions>
+        <Button Content="Set Zero Point" Height="23" HorizontalAlignment="Left" Name="buttonZero" VerticalAlignment="Top" Width="133" Click="buttonZero_Click" Margin="4,32,0,0" />
+        <Button Content="&lt;&lt;" FontSize="11" Height="23" HorizontalAlignment="Left" Name="buttonMaxIn" VerticalAlignment="Top" Width="25" Click="buttonMaxIn_Click" Margin="4,7,0,0" />
+        <Button Content="&gt;&gt;" FontSize="11" Height="23" HorizontalAlignment="Left" Margin="112,7,0,0" Name="buttonMaxOut" Opacity="1" VerticalAlignment="Top" Width="25" Click="buttonMaxOut_Click" />
+        <Button Content="&gt;" Height="23" HorizontalAlignment="Left" Margin="88,7,0,0" Name="buttonMoveOut" ToolTip="Move the focuser out manually" VerticalAlignment="Top" Width="25" Click="buttonMoveOut_Click" />
+        <Button Content="&lt;" Height="23" Margin="27,7,0,0" Name="buttonMoveIn" ToolTip="Move the focuser in manually" VerticalAlignment="Top" Width="25" HorizontalAlignment="Left" Click="buttonMoveIn_Click" />
+        <TextBox Text="{Binding Path=MoveSize, Mode=TwoWay}"  Height="23" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="52,7,0,0" Name="textBoxMoveSize" TextAlignment="Center" ToolTip="The relative amount to move the focuser by when using the nudge In/Out buttons" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="36" />
+        <Button Content="Goto Zero Point" Height="23" HorizontalAlignment="Left" Margin="4,59,0,0" Name="buttonGotoZero" VerticalAlignment="Top" Width="133" Click="buttonGotoZero_Click" />
+    </Grid>
+</Window>
